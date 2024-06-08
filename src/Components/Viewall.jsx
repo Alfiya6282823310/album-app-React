@@ -3,9 +3,9 @@ import Navbar from './Navbar'
 import axios from 'axios'
 
 const Viewall = () => {
-    const [data,changeData]= useState([])
+    const [data,changeData]= useState({"articles":[]})
     const fetchData=()=>{
-        axios.get("https://jsonplaceholder.typicode.com/albums").then(
+        axios.get("https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=9b6ac262eea44bcbbf80ae1b064f631d").then(
             (response)=>{
                 console.log(response.data)
                 changeData(response.data)
@@ -31,17 +31,17 @@ const Viewall = () => {
                             </thead>
                             <tbody>
                               {
-                                data.map(
+                                data.articles.map(
                                     (value,index) => {
                                         return   <tr>
-                                        <td>{value.userId}</td>
-                                        <td>{value.id}</td>
                                         <td>{value.title}</td>
+                                        <td>{value.name}</td>
+                                        <td>{value.publishedAt}</td>
                                         
                                     </tr>
                                     }
                                 )
-                              }
+}
                             </tbody>
                         </table>
                     </div>
